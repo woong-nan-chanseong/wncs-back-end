@@ -59,7 +59,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         
     - name: Docker Hub 퍼블리시
-      run: docker push parksewoong/mssaem:latest
+      run: docker push parksewoong/wncs:latest
 
     - name: Depoly in AWS ec2
       uses: appleboy/ssh-action@master
@@ -71,4 +71,4 @@ jobs:
            sudo docker stop $(sudo docker ps -a -q) 
            sudo docker rm $(sudo docker ps -a -q) 
            sudo docker pull parksewoong/wncs:latest
-           sudo docker run -d -p 8080:8080 --name mssaem-server parksewoong/wncs:latest
+           sudo docker run -d -p 8080:8080 --name wncs-server parksewoong/wncs:latest
