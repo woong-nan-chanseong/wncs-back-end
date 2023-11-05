@@ -36,10 +36,10 @@ public class MemberPhotoService {
 
     public String insertPhoto(List<MultipartFile> multipartFiles, MemberPhotoInfo memberPhotoInfo) {
         List<S3Result> s3Results = s3Service.uploadFile(multipartFiles);
-        Member member = memberRepository.findMemberByWalletAddress(memberPhotoInfo.getWalletAddress());
+        Member member = memberRepository.findById(memberPhotoInfo.getMemberId()).orElseThrow();
         MemberPhoto memberPhoto = new MemberPhoto(memberPhotoInfo.getName(), memberPhotoInfo.getDescription(), s3Results.get(0).getImgUrl(), member);
         memberPhotoRepository.save(memberPhoto);
-        return "사진 저장 완료";
+        return memberPhoto.getImageUrl();
     }
 
     public String insertIpfs(Long memberPhotoId) throws IOException {

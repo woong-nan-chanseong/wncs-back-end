@@ -12,6 +12,6 @@ public class MemberPhotoRequestDto {
     public static class MemberPhotoInfo {
         private String name;
         private String description;
-        private String walletAddress;
+        private Long memberId;
     }
 }

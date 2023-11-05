@@ -26,4 +26,10 @@ public class Member extends BaseTimeEntity {
     }
 
     private String walletAddress;
+
+    private boolean subscribe;
+
+    public void setSubscribe() {
+        this.subscribe = true;
+    }
 }

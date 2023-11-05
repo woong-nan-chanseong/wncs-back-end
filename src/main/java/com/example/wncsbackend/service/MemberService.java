@@ -17,4 +17,10 @@ public class MemberService {
         memberRepository.save(member);
         return "유저 등록 완료";
     }
+
+    public String subscribeMember(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow();
+        member.setSubscribe();;
+        return "구독 완료";
+    }
 }

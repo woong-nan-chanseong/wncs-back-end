@@ -21,4 +21,12 @@ public class MemberController {
     public ResponseEntity<String> insertMember(@RequestParam String walletAddress) {
         return ResponseEntity.ok(memberService.insertMember(walletAddress));
     }
+
+    /**
+     * 구독하기
+     */
+    @PostMapping("/member/subscribe")
+    public ResponseEntity<String> subscribeMember(@RequestParam Long memberId) {
+        return ResponseEntity.ok(memberService.subscribeMember(memberId));
+    }
 }
