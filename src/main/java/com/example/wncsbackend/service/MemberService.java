@@ -23,4 +23,9 @@ public class MemberService {
         member.setSubscribe();;
         return "구독 완료";
     }
+
+    public String getWalletAddress(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow();
+        return member.getWalletAddress();
+    }
 }
