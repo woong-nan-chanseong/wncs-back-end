@@ -1,11 +1,12 @@
 package com.example.wncsbackend.controller;
 
 
+import com.example.wncsbackend.domain.MemberAiText.dto.MemberAiTextRequestDto.MemberAiTextInfo;
 import com.example.wncsbackend.service.MemberAiTextService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -15,8 +16,8 @@ public class MemberAiTextController {
     private final MemberAiTextService memberAiTextService;
 
     @PostMapping("aitext")
-    public ResponseEntity<String> insertAiText(@RequestParam String aiText){
-        return ResponseEntity.ok(memberAiTextService.insertAiText(aiText));
+    public ResponseEntity<String> insertAiText(@RequestBody MemberAiTextInfo memberAiTextInfo){
+        return ResponseEntity.ok(memberAiTextService.insertAiText(memberAiTextInfo));
     }
 
 }

@@ -1,10 +1,13 @@
-package com.example.wncsbackend.domain;
+package com.example.wncsbackend.domain.MemberAiText;
 
+import com.example.wncsbackend.domain.Member;
 import com.example.wncsbackend.global.common.BaseTimeEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,9 +23,18 @@ public class MemberAiText extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String aiText;
+    private String seed;
+    private String prompt;
+    private String lora;
 
-    public MemberAiText(String aiText) {
-        this.aiText = aiText;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
+
+    public MemberAiText(String seed, String prompt, String lora, Member member) {
+        this.seed = seed;
+        this.prompt = prompt;
+        this.lora = lora;
+        this.member = member;
     }
+
 }
