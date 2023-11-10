@@ -15,7 +15,7 @@ public class MemberAiTextController {
 
     private final MemberAiTextService memberAiTextService;
 
-    @PostMapping("aitext")
+    @PostMapping("aiText")
     public ResponseEntity<String> insertAiText(@RequestBody MemberAiTextInfo memberAiTextInfo){
         return ResponseEntity.ok(memberAiTextService.insertAiText(memberAiTextInfo));
     }

@@ -6,6 +6,8 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.example.wncsbackend.global.s3.dto.S3Result;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import javax.imageio.ImageIO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -50,27 +53,21 @@ public class S3Service {
         }
     }
 
-    public List<S3Result> uploadFile(List<MultipartFile> multipartFiles) {
-        List<S3Result> fileList = new ArrayList<>();
+    public S3Result uploadFile(MultipartFile multipartFile) {
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentLength(multipartFile.getSize());
+        objectMetadata.setContentType(multipartFile.getContentType());
 
-        // forEach 구문을 통해 multipartFile로 넘어온 파일들 하나씩 fileList에 추가
-        multipartFiles.forEach(file -> {
-            String fileName = createFileName(file.getOriginalFilename());
-            ObjectMetadata objectMetadata = new ObjectMetadata();
-            objectMetadata.setContentLength(file.getSize());
-            objectMetadata.setContentType(file.getContentType());
+        try (InputStream inputStream = multipartFile.getInputStream()) {
+            s3Client.putObject(
+                    new PutObjectRequest(bucket, multipartFile.getOriginalFilename(), inputStream, objectMetadata)
+                            .withCannedAcl(CannedAccessControlList.PublicRead));
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "파일 업로드에 실패했습니다.");
+        }
 
-            try (InputStream inputStream = file.getInputStream()) {
-                s3Client.putObject(
-                        new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
-                                .withCannedAcl(CannedAccessControlList.PublicRead));
-            } catch (IOException e) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                        "파일 업로드에 실패했습니다.");
-            }
-            fileList.add(new S3Result(s3Client.getUrl(bucket, fileName).toString()));
-        });
-        return fileList;
+        return new S3Result(s3Client.getUrl(bucket, multipartFile.getOriginalFilename()).toString());
     }
 
     public void deleteFile(String fileName) {
@@ -88,6 +85,17 @@ public class S3Service {
             fos.write(multipartFile.getBytes());
         }
         return file;
+    }
+
+    public static MultipartFile convertBufferedImageToMultipartFile(BufferedImage image) {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "jpg", out);
+        } catch (IOException e) {
+            return null;
+        }
+        byte[] bytes = out.toByteArray();
+        return new CustomMultipartFile(bytes, "image", "image.jpeg", "jpg", bytes.length);
     }
 
 }

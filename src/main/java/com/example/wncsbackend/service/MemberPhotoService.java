@@ -33,11 +33,15 @@ public class MemberPhotoService {
     private final MemberRepository memberRepository;
     private final MemberPhotoRepository memberPhotoRepository;
     private final S3Service s3Service;
+    private final Base64DecodeService base64DecodeService;
 
-    public String insertPhoto(List<MultipartFile> multipartFiles, MemberPhotoInfo memberPhotoInfo) {
-        List<S3Result> s3Results = s3Service.uploadFile(multipartFiles);
+    public String insertPhoto(MemberPhotoInfo memberPhotoInfo) throws IOException {
+        MultipartFile multipartFile = base64DecodeService.decodeBase64ToImage(memberPhotoInfo.getBase64());
+        S3Result s3Result = s3Service.uploadFile(multipartFile);
+
         Member member = memberRepository.findById(memberPhotoInfo.getMemberId()).orElseThrow();
-        MemberPhoto memberPhoto = new MemberPhoto(memberPhotoInfo.getName(), memberPhotoInfo.getDescription(), s3Results.get(0).getImgUrl(), member);
+
+        MemberPhoto memberPhoto = new MemberPhoto(memberPhotoInfo.getName(), memberPhotoInfo.getDescription(), s3Result.getImgUrl(), member);
         memberPhotoRepository.save(memberPhoto);
         return memberPhoto.getImageUrl();
     }

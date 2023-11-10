@@ -10,10 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,14 +20,13 @@ public class MemberPhotoController {
 
     private final MemberPhotoService memberPhotoService;
 
-
     /**
      * S3에 사진 입력
      */
     @PostMapping("/photo")
-    public ResponseEntity<String> insertPhoto(@RequestPart(value = "images") List<MultipartFile> multipartFile,
-                                              @RequestPart(value = "memberPhotoInfo") MemberPhotoInfo memberPhotoInfo) {
-        return ResponseEntity.ok(memberPhotoService.insertPhoto(multipartFile, memberPhotoInfo));
+    public ResponseEntity<String> insertPhoto(@RequestBody MemberPhotoInfo memberPhotoInfo)
+            throws IOException {
+       return ResponseEntity.ok(memberPhotoService.insertPhoto(memberPhotoInfo));
     }
 
     /**
