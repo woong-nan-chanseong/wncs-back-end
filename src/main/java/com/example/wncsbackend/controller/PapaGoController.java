@@ -3,8 +3,6 @@ package com.example.wncsbackend.controller;
 import com.example.wncsbackend.service.PapaGoService;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

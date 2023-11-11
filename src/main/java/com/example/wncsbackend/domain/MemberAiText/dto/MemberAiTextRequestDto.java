@@ -13,6 +13,6 @@ public class MemberAiTextRequestDto {
         private String seed;
         private String prompt;
         private String lora;
-        private Long memberId;
+        private Long memberPhotoId;
     }
 }

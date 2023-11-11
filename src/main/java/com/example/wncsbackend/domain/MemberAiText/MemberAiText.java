@@ -1,6 +1,6 @@
 package com.example.wncsbackend.domain.MemberAiText;
 
-import com.example.wncsbackend.domain.Member;
+import com.example.wncsbackend.domain.MemberPhoto.MemberPhoto;
 import com.example.wncsbackend.global.common.BaseTimeEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,13 +28,13 @@ public class MemberAiText extends BaseTimeEntity {
     private String lora;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private MemberPhoto memberPhoto;
 
-    public MemberAiText(String seed, String prompt, String lora, Member member) {
+    public MemberAiText(String seed, String prompt, String lora, MemberPhoto memberPhoto) {
         this.seed = seed;
         this.prompt = prompt;
         this.lora = lora;
-        this.member = member;
+        this.memberPhoto = memberPhoto;
     }
 
 }
