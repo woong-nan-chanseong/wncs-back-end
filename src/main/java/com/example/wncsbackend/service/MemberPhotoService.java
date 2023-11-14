@@ -2,6 +2,7 @@ package com.example.wncsbackend.service;
 
 import com.example.wncsbackend.domain.Member;
 import com.example.wncsbackend.domain.MemberPhoto.MemberPhoto;
+import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoRequestDto.MemberPhotoBase64;
 import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoRequestDto.MemberPhotoInfo;
 import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoResultDto.MemberPhotoRes;
 import com.example.wncsbackend.global.s3.S3Service;
@@ -35,15 +36,17 @@ public class MemberPhotoService {
     private final S3Service s3Service;
     private final Base64DecodeService base64DecodeService;
 
-    public String insertPhoto(MemberPhotoInfo memberPhotoInfo) throws IOException {
-        MultipartFile multipartFile = base64DecodeService.decodeBase64ToImage(memberPhotoInfo.getBase64());
+    public String insertBase64Photo(MemberPhotoBase64 memberPhotoBase64) throws IOException {
+        MultipartFile multipartFile = base64DecodeService.decodeBase64ToImage(memberPhotoBase64.getBase64());
         S3Result s3Result = s3Service.uploadFile(multipartFile);
+        return  s3Result.getImgUrl();
+    }
 
+    public String insertMemberPhotoInfo(MemberPhotoInfo memberPhotoInfo) throws IOException {
         Member member = memberRepository.findById(memberPhotoInfo.getMemberId()).orElseThrow();
-
-        MemberPhoto memberPhoto = new MemberPhoto(memberPhotoInfo.getName(), memberPhotoInfo.getDescription(), s3Result.getImgUrl(), member);
+        MemberPhoto memberPhoto = new MemberPhoto(memberPhotoInfo.getName(), memberPhotoInfo.getDescription(), memberPhotoInfo.getImgUrl(), member);
         memberPhotoRepository.save(memberPhoto);
-        return memberPhoto.getImageUrl();
+        return "유저 사진 정보 저장 완료";
     }
 
     public String insertIpfs(Long memberPhotoId) throws IOException {

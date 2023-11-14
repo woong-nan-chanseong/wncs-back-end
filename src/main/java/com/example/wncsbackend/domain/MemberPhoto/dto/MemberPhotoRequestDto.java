@@ -10,9 +10,17 @@ public class MemberPhotoRequestDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class MemberPhotoInfo {
-        private String base64;
+        private String imgUrl;
         private String name;
         private String description;
         private Long memberId;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MemberPhotoBase64 {
+        private String base64;
+    }
+
 }

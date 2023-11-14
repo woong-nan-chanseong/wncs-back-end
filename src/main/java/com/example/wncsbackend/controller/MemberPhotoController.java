@@ -1,6 +1,7 @@
 package com.example.wncsbackend.controller;
 
 
+import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoRequestDto.MemberPhotoBase64;
 import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoRequestDto.MemberPhotoInfo;
 import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoResultDto.MemberPhotoRes;
 import com.example.wncsbackend.service.MemberPhotoService;
@@ -21,12 +22,20 @@ public class MemberPhotoController {
     private final MemberPhotoService memberPhotoService;
 
     /**
-     * S3에 사진 입력
+     * Base64 사진 입력
      */
     @PostMapping("/photo")
-    public ResponseEntity<String> insertPhoto(@RequestBody MemberPhotoInfo memberPhotoInfo)
+    public ResponseEntity<String> insertPhoto(@RequestBody MemberPhotoBase64 memberPhotoBase64)
             throws IOException {
-       return ResponseEntity.ok(memberPhotoService.insertPhoto(memberPhotoInfo));
+       return ResponseEntity.ok(memberPhotoService.insertBase64Photo(memberPhotoBase64));
+    }
+
+    /**
+     * Base64 사진 입력
+     */
+    @PostMapping("/photo/information")
+    public ResponseEntity<String> insertPhoto(@RequestBody MemberPhotoInfo memberPhotoInfo)throws IOException {
+        return ResponseEntity.ok(memberPhotoService.insertMemberPhotoInfo(memberPhotoInfo));
     }
 
     /**
