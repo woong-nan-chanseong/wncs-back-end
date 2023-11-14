@@ -12,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Getter
 @AllArgsConstructor
@@ -41,6 +42,7 @@ public class MemberPhoto extends BaseTimeEntity {
         this.member = member;
     }
 
+    @Transactional
     public void modifyRegistrationNFT(){
         this.registrationNFT = true;
     }
