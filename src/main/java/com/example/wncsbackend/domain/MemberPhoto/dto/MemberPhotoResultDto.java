@@ -14,5 +14,6 @@ public class MemberPhotoResultDto {
         private String description;
         private String imgUrl;
         private boolean registrationNFT;
+        private int nftCount;
     }
 }
