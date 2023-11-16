@@ -13,5 +13,6 @@ public class NFTRequestDto {
         private String walletAddress;
         private String ipfsUrl;
         private Long memberPhotoId;
+        private int nftCount;
     }
 }

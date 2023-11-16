@@ -22,6 +22,7 @@ public class Web3jService {
     public TransactionReceipt nftCreate(MemberNFTInfo memberNFTInfo) throws Exception {
         MemberPhoto memberPhoto  = memberPhotoRepository.findById(memberNFTInfo.getMemberPhotoId()).orElseThrow();
         memberPhoto.modifyRegistrationNFT();
+        memberPhoto.modifyNtfCount(memberNFTInfo.getNftCount());
 
         return nft.create(memberNFTInfo.getWalletAddress(), "ipfs://" + memberNFTInfo.getIpfsUrl())
                 .sendAsync()

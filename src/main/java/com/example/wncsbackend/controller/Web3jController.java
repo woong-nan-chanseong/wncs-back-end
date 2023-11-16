@@ -14,7 +14,6 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 public class Web3jController {
     private final Web3jService web3jService;
 
-
     @PostMapping("/create")
     public TransactionReceipt nftCreate(@RequestBody MemberNFTInfo memberNFTInfo) throws Exception {
         return web3jService.nftCreate(memberNFTInfo);

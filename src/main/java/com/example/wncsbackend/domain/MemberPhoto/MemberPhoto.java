@@ -30,6 +30,8 @@ public class MemberPhoto extends BaseTimeEntity {
 
     private String imageUrl;
 
+    private int nftCount;
+
     private boolean registrationNFT;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,6 +47,11 @@ public class MemberPhoto extends BaseTimeEntity {
     @Transactional
     public void modifyRegistrationNFT(){
         this.registrationNFT = true;
+    }
+
+    @Transactional
+    public void modifyNtfCount(int nftCount) {
+        this.nftCount = nftCount;
     }
 
 }
