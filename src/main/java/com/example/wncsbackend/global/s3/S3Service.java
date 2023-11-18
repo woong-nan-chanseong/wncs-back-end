@@ -60,7 +60,6 @@ public class S3Service {
 
         String fileName = createFileName(multipartFile.getOriginalFilename());
 
-
         try (InputStream inputStream = multipartFile.getInputStream()) {
             s3Client.putObject(
                     new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
@@ -70,7 +69,7 @@ public class S3Service {
                     "파일 업로드에 실패했습니다.");
         }
 
-        return new S3Result(s3Client.getUrl(bucket, multipartFile.getOriginalFilename()).toString());
+        return new S3Result(s3Client.getUrl(bucket, fileName).toString());
     }
 
     public void deleteFile(String fileName) {
