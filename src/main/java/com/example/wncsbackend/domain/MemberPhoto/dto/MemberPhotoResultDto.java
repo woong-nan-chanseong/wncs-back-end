@@ -28,9 +28,9 @@ public class MemberPhotoResultDto {
             this.imgUrl = imgUrl;
             this.registrationNFT = registrationNFT;
             this.nftCount = nftCount;
-            this.lora = memberAiText.getLora();
-            this.prompt = memberAiText.getPrompt();
-            this.seed = memberAiText.getSeed();
+            this.lora = memberAiText != null ? memberAiText.getLora() : "";
+            this.prompt = memberAiText != null ? memberAiText.getPrompt() : "";
+            this.seed = memberAiText != null ? memberAiText.getSeed() : "";
         }
     }
 }

@@ -79,10 +79,9 @@ public class MemberPhotoService {
     public List<MemberPhotoRes> selectAllPhoto(){
         List<MemberPhoto> memberPhotos = memberPhotoRepository.findAll();
 
-
         return memberPhotos.stream()
                 .map(mp -> new MemberPhotoRes(mp.getId(), mp.getName(), mp.getDescription(), mp.getImageUrl(), mp.isRegistrationNFT(), mp.getNftCount(),
-                        memberAiTextRepository.getReferenceById(mp.getId())))
+                        memberAiTextRepository.findById(mp.getId()).orElseThrow()))
                 .collect(Collectors.toList());
     }
 }
