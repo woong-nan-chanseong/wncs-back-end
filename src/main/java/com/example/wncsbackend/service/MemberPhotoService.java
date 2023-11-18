@@ -1,12 +1,14 @@
 package com.example.wncsbackend.service;
 
 import com.example.wncsbackend.domain.Member;
+import com.example.wncsbackend.domain.MemberAiText.MemberAiText;
 import com.example.wncsbackend.domain.MemberPhoto.MemberPhoto;
 import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoRequestDto.MemberPhotoBase64;
 import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoRequestDto.MemberPhotoInfo;
 import com.example.wncsbackend.domain.MemberPhoto.dto.MemberPhotoResultDto.MemberPhotoRes;
 import com.example.wncsbackend.global.s3.S3Service;
 import com.example.wncsbackend.global.s3.dto.S3Result;
+import com.example.wncsbackend.repository.MemberAiTextRepository;
 import com.example.wncsbackend.repository.MemberPhotoRepository;
 import com.example.wncsbackend.repository.MemberRepository;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -33,6 +35,7 @@ public class MemberPhotoService {
 
     private final MemberRepository memberRepository;
     private final MemberPhotoRepository memberPhotoRepository;
+    private final MemberAiTextRepository memberAiTextRepository;
     private final S3Service s3Service;
     private final Base64DecodeService base64DecodeService;
 
@@ -76,8 +79,10 @@ public class MemberPhotoService {
     public List<MemberPhotoRes> selectAllPhoto(){
         List<MemberPhoto> memberPhotos = memberPhotoRepository.findAll();
 
+
         return memberPhotos.stream()
-                .map(mp -> new MemberPhotoRes(mp.getId(), mp.getName(), mp.getDescription(), mp.getImageUrl(), mp.isRegistrationNFT(), mp.getNftCount()))
+                .map(mp -> new MemberPhotoRes(mp.getId(), mp.getName(), mp.getDescription(), mp.getImageUrl(), mp.isRegistrationNFT(), mp.getNftCount(),
+                        memberAiTextRepository.getReferenceById(mp.getId())))
                 .collect(Collectors.toList());
     }
 }

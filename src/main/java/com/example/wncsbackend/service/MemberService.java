@@ -22,7 +22,7 @@ public class MemberService {
     @Transactional
     public String subscribeMember(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow();
-        member.setSubscribe();;
+        member.setSubscribe();
         return "구독 완료";
     }
 

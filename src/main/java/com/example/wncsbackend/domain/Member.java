@@ -10,6 +10,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Getter
 @AllArgsConstructor
@@ -29,6 +30,7 @@ public class Member extends BaseTimeEntity {
 
     private boolean subscribe;
 
+    @Transactional
     public void setSubscribe() {
         this.subscribe = true;
     }
