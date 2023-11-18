@@ -58,9 +58,12 @@ public class S3Service {
         objectMetadata.setContentLength(multipartFile.getSize());
         objectMetadata.setContentType(multipartFile.getContentType());
 
+        String fileName = createFileName(multipartFile.getOriginalFilename());
+
+
         try (InputStream inputStream = multipartFile.getInputStream()) {
             s3Client.putObject(
-                    new PutObjectRequest(bucket, multipartFile.getOriginalFilename(), inputStream, objectMetadata)
+                    new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
                             .withCannedAcl(CannedAccessControlList.PublicRead));
         } catch (IOException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
