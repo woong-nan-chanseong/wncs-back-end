@@ -5,6 +5,7 @@ import com.example.wncsbackend.domain.Member;
 import com.example.wncsbackend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +19,7 @@ public class MemberService {
         return "유저 등록 완료";
     }
 
+    @Transactional
     public String subscribeMember(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow();
         member.setSubscribe();;
@@ -27,5 +29,10 @@ public class MemberService {
     public String getWalletAddress(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow();
         return member.getWalletAddress();
+    }
+
+    public boolean getSubscribeMember(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow();
+        return member.isSubscribe();
     }
 }

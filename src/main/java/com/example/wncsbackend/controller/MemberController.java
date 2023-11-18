@@ -38,4 +38,12 @@ public class MemberController {
     public ResponseEntity<String> getWalletAddress(@RequestParam Long memberId) {
         return ResponseEntity.ok(memberService.getWalletAddress(memberId));
     }
+
+    /**
+     * 유저 구독
+     */
+    @GetMapping("/member/subscribe")
+    public ResponseEntity<Boolean> isSubscribe(@RequestParam Long memberId) {
+        return ResponseEntity.ok(memberService.getSubscribeMember(memberId));
+    }
 }
