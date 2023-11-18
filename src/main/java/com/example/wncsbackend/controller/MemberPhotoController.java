@@ -34,7 +34,7 @@ public class MemberPhotoController {
      * Base64 사진 입력
      */
     @PostMapping("/photo/information")
-    public ResponseEntity<String> insertPhoto(@RequestBody MemberPhotoInfo memberPhotoInfo)throws IOException {
+    public ResponseEntity<Long> insertPhoto(@RequestBody MemberPhotoInfo memberPhotoInfo)throws IOException {
         return ResponseEntity.ok(memberPhotoService.insertMemberPhotoInfo(memberPhotoInfo));
     }
 

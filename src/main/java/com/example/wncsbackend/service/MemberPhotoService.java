@@ -42,11 +42,11 @@ public class MemberPhotoService {
         return  s3Result.getImgUrl();
     }
 
-    public String insertMemberPhotoInfo(MemberPhotoInfo memberPhotoInfo) throws IOException {
+    public Long insertMemberPhotoInfo(MemberPhotoInfo memberPhotoInfo) throws IOException {
         Member member = memberRepository.findById(memberPhotoInfo.getMemberId()).orElseThrow();
         MemberPhoto memberPhoto = new MemberPhoto(memberPhotoInfo.getName(), memberPhotoInfo.getDescription(), memberPhotoInfo.getImgUrl(), member);
         memberPhotoRepository.save(memberPhoto);
-        return "유저 사진 정보 저장 완료";
+        return memberPhoto.getId();
     }
 
     public String insertIpfs(Long memberPhotoId) throws IOException {
