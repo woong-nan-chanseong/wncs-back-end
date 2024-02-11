@@ -18,8 +18,8 @@
 
 ### 2. 이더리움을 사용하여 NFT 등록
 <p align="center">
-    <img src="https://github.com/woong-nan-chanseong/wncs-back-end/assets/49395754/4f2b2de0-f7da-467b-a836-c1f42f7d1c7f" alt="image 1" width="400"/>
-    <img src="https://github.com/woong-nan-chanseong/wncs-back-end/assets/49395754/56abff53-3396-4ff7-801c-00ab963324e8" alt="image 2" width="430"/>
+    <img src="https://github.com/woong-nan-chanseong/wncs-back-end/assets/49395754/4f2b2de0-f7da-467b-a836-c1f42f7d1c7f" alt="image 1" width="350"/>
+    <img src="https://github.com/woong-nan-chanseong/wncs-back-end/assets/49395754/56abff53-3396-4ff7-801c-00ab963324e8" alt="image 2" width="380"/>
  </p>
  
   -NFT 등록을 하기 위해서는 Web3J와 스마트 컨트랙트를 개발하기 위한 Solidity, IPFS 파일을 등록하기 위한 Pinata를 사용했습니다.
