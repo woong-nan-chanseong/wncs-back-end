@@ -2,9 +2,9 @@
 
 저희 프로젝트의 핵심 개발 목표는 ‘새로운 기술을 낮은 접근성으로 경험할 수 있는 서비스 제공’입니다. 
 두 가지의 기술, ‘블록체인’과 ‘생성형 AI’를 새로운 기술로서 제공하고, 기존에 제공되고 있는 서비스들의 단점인 좋지 않은 접근성에 초점을 맞춰 개선된 서비스를 제공하는 것이 최종 목표입니다.
+<br>
 
 ## 핵심 기능 소개
-
 ### 1. Stable diffusion을 사용하여 이미지 생성
 <p align="center">
   <img src="https://github.com/woong-nan-chanseong/wncs-back-end/assets/49395754/de5099c7-ab04-4424-8860-eb2a81aded5f" alt="image 1" width="400"/>
@@ -23,7 +23,6 @@
  </p>
  
   -NFT 등록을 하기 위해서는 Web3J와 스마트 컨트랙트를 개발하기 위한 Solidity, IPFS 파일을 등록하기 위한 Pinata를 사용했습니다.
-
 <br>
 
 ### 3. 구독 서비스 구현
@@ -38,7 +37,7 @@
 
 
 ## 😺 팀원 소개
-|                                        AI                                         |                                        FRONTEND                                         |               Backend                |
+|                                        AI                                         |                                        FRONTEND                                         |               BACKEND                |
 |:--------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------:|:------------------------------------:|
 | <img src="https://avatars.githubusercontent.com/u/118545892?v=4" width=320px alt="김성민"/> | <img src="https://avatars.githubusercontent.com/u/140628455?v=4" width=320px alt="김찬영"/>| <img src="https://avatars.githubusercontent.com/u/49395754?v=4" width=320px alt="박세웅"/> |
 |                          [김성민](https://github.com/SeongMon)                          |       [김찬영](https://github.com/flashcy)                                         |   [박세웅](https://github.com/SeWooooong)              |
@@ -48,7 +47,6 @@
 ## 🖥️ 운영 아키텍처
 
 ![image](https://github.com/woong-nan-chanseong/wncs-back-end/assets/49395754/137b0c65-00ba-40cb-b83e-bd5efbcaed21)
-
 <br>
 
 ## ⌨️ CI/CD 파이프라인
